@@ -308,7 +308,7 @@ ax.bar(x, y, color=COLORS["primary"])
 ### Tamanhos de Fonte
 
 ```python
-from config.defaults import FONT_SIZE_TITLE, FONT_SIZE_LABEL, FONT_SIZE_TICK
+from config.defaults import TYPOGRAPHY_SIZES, TYPOGRAPHY_STYLES
 
 ax.set_title("Meu Título", fontsize=FONT_SIZE_TITLE)         # 16
 ax.set_ylabel("Label", fontsize=FONT_SIZE_LABEL)             # 10
@@ -355,7 +355,7 @@ def migration_001_receita_mensal():
     # Gerar gráfico
     fig, ax = plt.subplots(figsize=FIGURE_SIZE_DEFAULT)
     ax.bar(df["mes"], df["receita"], color=COLORS["primary"])
-    ax.set_title("Receita por Mês", fontsize=FONT_SIZE_TITLE)
+    ax.set_title("Receita por Mês", fontsize=TYPOGRAPHY_SIZES["xl"])
     
     # Salvar
     fig.savefig("outputs/001_receita.png", dpi=DPI, bbox_inches="tight")

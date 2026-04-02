@@ -10,7 +10,15 @@ Passos para usar:
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from config.defaults import format_currency, format_number, COLORS, FONT_SIZE_TITLE
+from config.defaults import (
+    format_currency,
+    format_number,
+    COLORS,
+    TEXT_COLORS,
+    CHART_COLORS,
+    TABLE_COLORS,
+    FONT_SIZE_TITLE,
+)
 
 
 def migration_template():
@@ -64,14 +72,22 @@ def migration_template():
         print("📈 Gerando gráfico...")
         fig, ax = plt.subplots(figsize=(12, 6))
         
-        ax.bar(df["mes"], df["valor"], color=COLORS["primary"], alpha=0.8)
-        ax.set_title("Receita por Mês", fontsize=FONT_SIZE_TITLE, fontweight="bold")
-        ax.set_xlabel("Período")
-        ax.set_ylabel("Faturamento (R$)")
-        
+        ax.bar(df["mes"], df["valor"], color=CHART_COLORS["chart_1"], alpha=0.8)
+        ax.set_facecolor(CHART_COLORS["chart_bg"])
+        ax.set_title(
+            "Receita por Mês",
+            fontsize=FONT_SIZE_TITLE,
+            fontweight="bold",
+            color=TEXT_COLORS["text_primary"],
+        )
+        ax.set_xlabel("Período", color=TEXT_COLORS["text_secondary"])
+        ax.set_ylabel("Faturamento (R$)", color=TEXT_COLORS["text_secondary"])
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+
         # Adicionar valores nas barras
         for i, v in enumerate(df["valor"]):
-            ax.text(i, v, format_currency(v), ha="center", va="bottom", fontsize=9)
+            ax.text(i, v, format_currency(v), ha="center", va="bottom", fontsize=9, color=TEXT_COLORS["text_primary"])
         
         fig.tight_layout()
         
@@ -145,6 +161,8 @@ EXEMPLO PRONTO DE OUTRAS MIGRATIONS:
     valor = format_currency(12345.67)  # "R$ 12.345,67"
     numero = format_number(98765)      # "98.765"
     cor = COLORS['success']             # "#2ca02c"
+    cor_grafico = CHART_COLORS['chart_1']
+    texto = TEXT_COLORS['text_primary']
 """
 
 if __name__ == "__main__":

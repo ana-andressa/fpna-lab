@@ -53,18 +53,55 @@ def format_date(date_obj) -> str:
 
 
 # ============================================================================
-# CORES DOS GRÁFICOS
+# CORES PADRÃO
 # ============================================================================
+# ── Base ──────────────────────────────────────────
 COLORS = {
-    "primary": "#1f77b4",       # Azul corporativo
-    "secondary": "#ff7f0e",     # Laranja
-    "success": "#2ca02c",       # Verde
-    "warning": "#d62728",       # Vermelho
-    "neutral": "#7f7f7f",       # Cinza
+    "primary":   "#1f77b4",  # Azul corporativo — links, destaques, série 1
+    "secondary": "#ff7f0e",  # Laranja — acento, alertas leves
+    "success":   "#2ca02c",  # Verde — positivo, crescimento
+    "warning":   "#d62728",  # Vermelho — negativo, queda
+    "neutral":   "#7f7f7f",  # Cinza — labels, elementos secundários
 }
 
-# Palheta de cores para múltiplos períodos
-PALETTE_SEQUENTIAL = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78"]
+# ── Texto ────────────────────────────────────
+TEXT_COLORS = {
+    "text_primary":   "#1a1a2e",  # Títulos e corpo principal
+    "text_secondary": "#4a5568",  # Subtítulos, rótulos
+    "text_muted":     "#9aa3b0",  # Notas, placeholders, disclaimers
+    "text_inverse":   "#ffffff",  # Texto sobre fundo escuro
+}
+
+def get_color(name: str, default: str = None) -> str:
+    """Retorna cor a partir do nome, com fallback opcional."""
+    if name in COLORS:
+        return COLORS[name]
+    if default is not None:
+        return default
+    raise KeyError(f"Cor não encontrada: {name}")
+
+
+# ── Gráficos ─────────────────────────────────────
+CHART_COLORS = {
+    "chart_1":  get_color("primary"),   # Série principal (herda primary)
+    "chart_2":  get_color("secondary"), # Série 2 (herda secondary)
+    "chart_3":  get_color("success"),   # Série positiva
+    "chart_4":  get_color("warning"),   # Série negativa
+    "chart_5":  "#9467bd",              # Série extra (roxo neutro)
+    "chart_bg": "#f9fafb",              # Background do gráfico
+}
+
+# ── Tabelas ──────────────────────────────────────
+TABLE_COLORS = {
+    "table_header":    get_color("primary"),  # Cabeçalho (herda primary)
+    "table_row_even":  "#f0f4f8",             # Zebra — linha par
+    "table_row_odd":   "#ffffff",             # Zebra — linha ímpar
+    "table_border":    "#e2e8f0",             # Dividers
+    "table_highlight": "#fff3cd",             # Linha de destaque (ex: total)
+}
+
+# Paleta de cores para múltiplos períodos
+PALETTE_SEQUENTIAL = [get_color("primary"), "#aec7e8", get_color("secondary"), "#ffbb78"]
 
 
 # ============================================================================
